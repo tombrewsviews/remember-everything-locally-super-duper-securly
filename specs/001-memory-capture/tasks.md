@@ -53,14 +53,14 @@
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T008 [P] [US1] Write bats contract tests in `tests/capture/text-capture.bats` — test correct file naming pattern, YAML front-matter fields (type, captured, source), body content preservation, exit code 0 on success [TS-006, TS-008]
-- [ ] T009 [P] [US1] Write bats error-handling tests in `tests/capture/text-capture.bats` — test empty input rejection (exit 1, stderr message), special character escaping in front-matter [TS-007, TS-008]
+- [x] T008 [P] [US1] Write bats contract tests in `tests/capture/text-capture.bats` — test correct file naming pattern, YAML front-matter fields (type, captured, source), body content preservation, exit code 0 on success [TS-006, TS-008]
+- [x] T009 [P] [US1] Write bats error-handling tests in `tests/capture/text-capture.bats` — test empty input rejection (exit 1, stderr message), special character escaping in front-matter [TS-007, TS-008]
 
 ### Implementation for User Story 1
 
-- [ ] T010 [US1] Implement `scripts/capture-text.sh` — receive text as $1, validate non-empty, generate timestamp, write markdown with YAML front-matter and body, trigger async reindex, output file path to stdout [TS-002, TS-006, TS-007, TS-008]
-- [ ] T011 [US1] Run shellcheck on `scripts/capture-text.sh` and fix all warnings
-- [ ] T012 [US1] Verify bats tests pass for text capture — all T008, T009 tests green
+- [x] T010 [US1] Implement `scripts/capture-text.sh` — receive text as $1, validate non-empty, generate timestamp, write markdown with YAML front-matter and body, trigger async reindex, output file path to stdout [TS-002, TS-006, TS-007, TS-008]
+- [x] T011 [US1] Run shellcheck on `scripts/capture-text.sh` and fix all warnings
+- [x] T012 [US1] Verify bats tests pass for text capture — all T008, T009 tests green
 
 **Checkpoint**: `capture-text.sh` fully functional and tested — text capture pipeline works end-to-end from CLI
 
@@ -75,14 +75,14 @@
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T013 [P] [US2] Write bats contract tests in `tests/capture/screen-capture.bats` — test correct file naming (md + png), PNG moved to assets/, markdown references image with relative path, annotation included in front-matter and body [TS-016, TS-019]
-- [ ] T014 [P] [US2] Write bats error-handling tests in `tests/capture/screen-capture.bats` — test missing image rejection (exit 1), zero-size image rejection (exit 1), temp file cleanup after success [TS-017, TS-018]
+- [x] T013 [P] [US2] Write bats contract tests in `tests/capture/screen-capture.bats` — test correct file naming (md + png), PNG moved to assets/, markdown references image with relative path, annotation included in front-matter and body [TS-016, TS-019]
+- [x] T014 [P] [US2] Write bats error-handling tests in `tests/capture/screen-capture.bats` — test missing image rejection (exit 1), zero-size image rejection (exit 1), temp file cleanup after success [TS-017, TS-018]
 
 ### Implementation for User Story 2
 
-- [ ] T015 [US2] Implement `scripts/capture-screen.sh` — receive temp image path + optional annotation, validate image exists and non-zero, generate timestamp, move PNG to assets/, write markdown with front-matter and image reference, trigger async reindex, output file path [TS-011, TS-013, TS-014, TS-016, TS-017, TS-018, TS-019]
-- [ ] T016 [US2] Run shellcheck on `scripts/capture-screen.sh` and fix all warnings
-- [ ] T017 [US2] Verify bats tests pass for screenshot capture — all T013, T014 tests green
+- [x] T015 [US2] Implement `scripts/capture-screen.sh` — receive temp image path + optional annotation, validate image exists and non-zero, generate timestamp, move PNG to assets/, write markdown with front-matter and image reference, trigger async reindex, output file path [TS-011, TS-013, TS-014, TS-016, TS-017, TS-018, TS-019]
+- [x] T016 [US2] Run shellcheck on `scripts/capture-screen.sh` and fix all warnings
+- [x] T017 [US2] Verify bats tests pass for screenshot capture — all T013, T014 tests green
 
 **Checkpoint**: `capture-screen.sh` fully functional — screenshot capture pipeline works end-to-end from CLI
 
@@ -97,16 +97,16 @@
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T018 [P] [US3] Write bats contract tests in `tests/capture/audio-capture.bats` — test start action (PID file created, stdout "recording", exit 0), stop action (markdown + WAV created, PID cleaned, duration + path output) [TS-027, TS-028]
-- [ ] T019 [P] [US3] Write bats error-handling tests in `tests/capture/audio-capture.bats` — test start-when-already-recording rejection, stop-when-not-recording rejection, transcription failure fallback text [TS-029, TS-030, TS-031]
+- [x] T018 [P] [US3] Write bats contract tests in `tests/capture/audio-capture.bats` — test start action (PID file created, stdout "recording", exit 0), stop action (markdown + WAV created, PID cleaned, duration + path output) [TS-027, TS-028]
+- [x] T019 [P] [US3] Write bats error-handling tests in `tests/capture/audio-capture.bats` — test start-when-already-recording rejection, stop-when-not-recording rejection, transcription failure fallback text [TS-029, TS-030, TS-031]
 
 ### Implementation for User Story 3
 
-- [ ] T020 [US3] Implement `scripts/capture-audio.sh` start action — check no active recording, start sox in background, write PID file, output "recording" [TS-020, TS-027, TS-029]
-- [ ] T021 [US3] Implement `scripts/capture-audio.sh` stop action — read PID, kill sox, calculate duration from WAV, run whisper-cpp transcription, move WAV to assets/, write markdown with transcription + audio reference, cleanup PID/temp, trigger reindex [TS-021, TS-022, TS-028, TS-030]
-- [ ] T022 [US3] Implement transcription failure fallback — if whisper-cpp fails or produces empty output, use "[Transcription unavailable — audio preserved]" as body text [TS-031]
-- [ ] T023 [US3] Run shellcheck on `scripts/capture-audio.sh` and fix all warnings
-- [ ] T024 [US3] Verify bats tests pass for audio capture — all T018, T019 tests green
+- [x] T020 [US3] Implement `scripts/capture-audio.sh` start action — check no active recording, start sox in background, write PID file, output "recording" [TS-020, TS-027, TS-029]
+- [x] T021 [US3] Implement `scripts/capture-audio.sh` stop action — read PID, kill sox, calculate duration from WAV, run whisper-cpp transcription, move WAV to assets/, write markdown with transcription + audio reference, cleanup PID/temp, trigger reindex [TS-021, TS-022, TS-028, TS-030]
+- [x] T022 [US3] Implement transcription failure fallback — if whisper-cpp fails or produces empty output, use "[Transcription unavailable — audio preserved]" as body text [TS-031]
+- [x] T023 [US3] Run shellcheck on `scripts/capture-audio.sh` and fix all warnings
+- [x] T024 [US3] Verify bats tests pass for audio capture — all T018, T019 tests green
 
 **Checkpoint**: `capture-audio.sh` fully functional — audio capture + transcription pipeline works end-to-end from CLI
 
@@ -119,11 +119,11 @@
 
 ### Implementation for User Story 4
 
-- [ ] T025 [US4] Create `templates/memcapture.lua` — Hammerspoon module with `hs.dockicon.hide()`, module-level state variables (isRecording, recordingIndicator, textChooser), SYSTEM_NAME placeholder for script paths [TS-032, TS-033]
-- [ ] T026 [US4] Implement text capture hotkey binding in `templates/memcapture.lua` — Ctrl+Opt+T binds to `hs.chooser` show, chooser callback calls `capture-text.sh` via `hs.task.new`, `hs.notify` with 2s auto-dismiss on success, duplicate shortcut focuses existing bar [TS-001, TS-002, TS-003, TS-004, TS-009]
-- [ ] T027 [US4] Implement screenshot capture hotkey binding in `templates/memcapture.lua` — Ctrl+Opt+S invokes `/usr/sbin/screencapture -i -s` via `hs.task.new`, on success shows chooser for annotation, calls `capture-screen.sh`, notification on complete [TS-010, TS-012, TS-013, TS-014, TS-015]
-- [ ] T028 [US4] Implement audio toggle hotkey binding in `templates/memcapture.lua` — Ctrl+Opt+A toggles isRecording state, first press calls `capture-audio.sh start` and shows `hs.menubar` red dot, second press calls `capture-audio.sh stop` and removes red dot, notification with duration [TS-020, TS-021, TS-023, TS-024, TS-034]
-- [ ] T029 [US4] Implement stealth measures in `templates/memcapture.lua` — dot-prefix temp files in `/tmp/`, no persistent UI elements, all notifications use `withdrawAfter=2` [TS-032, TS-033, TS-035, TS-036, TS-037]
+- [x] T025 [US4] Create `templates/memcapture.lua` — Hammerspoon module with `hs.dockicon.hide()`, module-level state variables (isRecording, recordingIndicator, textChooser), SYSTEM_NAME placeholder for script paths [TS-032, TS-033]
+- [x] T026 [US4] Implement text capture hotkey binding in `templates/memcapture.lua` — Ctrl+Opt+T binds to `hs.chooser` show, chooser callback calls `capture-text.sh` via `hs.task.new`, `hs.notify` with 2s auto-dismiss on success, duplicate shortcut focuses existing bar [TS-001, TS-002, TS-003, TS-004, TS-009]
+- [x] T027 [US4] Implement screenshot capture hotkey binding in `templates/memcapture.lua` — Ctrl+Opt+S invokes `/usr/sbin/screencapture -i -s` via `hs.task.new`, on success shows chooser for annotation, calls `capture-screen.sh`, notification on complete [TS-010, TS-012, TS-013, TS-014, TS-015]
+- [x] T028 [US4] Implement audio toggle hotkey binding in `templates/memcapture.lua` — Ctrl+Opt+A toggles isRecording state, first press calls `capture-audio.sh start` and shows `hs.menubar` red dot, second press calls `capture-audio.sh stop` and removes red dot, notification with duration [TS-020, TS-021, TS-023, TS-024, TS-034]
+- [x] T029 [US4] Implement stealth measures in `templates/memcapture.lua` — dot-prefix temp files in `/tmp/`, no persistent UI elements, all notifications use `withdrawAfter=2` [TS-032, TS-033, TS-035, TS-036, TS-037]
 
 **Checkpoint**: Hammerspoon Lua module complete — all three capture modalities accessible via global hotkeys with full stealth
 
