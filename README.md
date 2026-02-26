@@ -1,4 +1,4 @@
-# local-ai-memory
+# remember-everything-locally-super-duper-securly
 
 A private, local AI memory system for macOS. Built on top of [Khoj](https://github.com/khoj-ai/khoj) — hardened for privacy, stealth, and offline-first operation.
 
@@ -44,8 +44,8 @@ Paste the contents of `AGENT-PROMPT.md` directly into any AI assistant (ChatGPT,
 If you prefer to install without an AI agent:
 
 ```bash
-git clone https://github.com/your-username/local-ai-memory.git
-cd local-ai-memory
+git clone https://github.com/your-username/remember-everything-locally-super-duper-securly.git
+cd remember-everything-locally-super-duper-securly
 chmod +x install.sh
 ./install.sh
 ```
