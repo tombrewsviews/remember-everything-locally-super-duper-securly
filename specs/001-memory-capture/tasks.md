@@ -136,14 +136,14 @@
 
 ### Implementation for User Story 5
 
-- [ ] T030 [US5] Add Step 13b to `install.sh` — install Hammerspoon, sox, whisper-cpp, bats-core, shellcheck via Homebrew [TS-038]
-- [ ] T031 [US5] Add Step 13c to `install.sh` — download ggml-base.en.bin whisper model from HuggingFace to `$SYS_DIR/.sys/` if not already present [TS-042]
-- [ ] T032 [US5] Add Step 13d to `install.sh` — create `$SYS_DIR/files/memories/assets/` directory and `.metadata_never_index` Spotlight exclusion marker [TS-035, TS-041]
-- [ ] T033 [US5] Add Step 13e to `install.sh` — sed-template and install capture scripts (capture-text.sh, capture-screen.sh, capture-audio.sh) to `$SYS_DIR/.sys/`, chmod +x [TS-039]
-- [ ] T034 [US5] Add Step 13f to `install.sh` — deploy `memcapture.lua` to `~/.hammerspoon/`, add `require("memcapture")` to init.lua, set `MJShowDockIconKey` to false, reload Hammerspoon [TS-039]
-- [ ] T035 [US5] Add Step 13g to `install.sh` — print macOS permission instructions (Accessibility, Screen Recording, Microphone) [TS-040]
-- [ ] T036 [US5] Run shellcheck on modified `install.sh` and fix all warnings
-- [ ] T037 [US5] Verify installer idempotency — re-run install does not error, preserves existing config and memories [TS-043]
+- [x] T030 [US5] Add Step 13b to `install.sh` — install Hammerspoon, sox, whisper-cpp, bats-core, shellcheck via Homebrew [TS-038]
+- [x] T031 [US5] Add Step 13c to `install.sh` — download ggml-base.en.bin whisper model from HuggingFace to `$SYS_DIR/.sys/` if not already present [TS-042]
+- [x] T032 [US5] Add Step 13d to `install.sh` — create `$SYS_DIR/files/memories/assets/` directory and `.metadata_never_index` Spotlight exclusion marker [TS-035, TS-041]
+- [x] T033 [US5] Add Step 13e to `install.sh` — sed-template and install capture scripts (capture-text.sh, capture-screen.sh, capture-audio.sh) to `$SYS_DIR/.sys/`, chmod +x [TS-039]
+- [x] T034 [US5] Add Step 13f to `install.sh` — deploy `memcapture.lua` to `~/.hammerspoon/`, add `require("memcapture")` to init.lua, set `MJShowDockIconKey` to false, reload Hammerspoon [TS-039]
+- [x] T035 [US5] Add Step 13g to `install.sh` — print macOS permission instructions (Accessibility, Screen Recording, Microphone) [TS-040]
+- [x] T036 [US5] Run shellcheck on modified `install.sh` and fix all warnings
+- [x] T037 [US5] Verify installer idempotency — re-run install does not error, preserves existing config and memories [TS-043]
 
 **Checkpoint**: Full installer integration complete — clean install sets up entire capture system
 
