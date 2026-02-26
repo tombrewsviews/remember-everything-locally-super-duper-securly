@@ -62,7 +62,10 @@ Then it will automatically:
 4. Generate a secure secret key
 5. Install your command to `~/.local/bin`
 6. Install a background watcher for Google Drive
-7. Set your access code
+7. Install memory capture tools (Hammerspoon, sox, whisper-cpp)
+8. Download the whisper speech-to-text model (~140 MB)
+9. Set up global hotkeys for instant capture
+10. Set your access code
 
 ## Usage
 
@@ -112,6 +115,47 @@ Create an iOS Shortcut:
 3. **Make Text File** — named with current timestamp
 4. **Save File** → Google Drive → your inbox folder
 
+## Memory Capture (hotkeys)
+
+Press a global keyboard shortcut to capture memories instantly — no terminal
+needed, no app switching.
+
+| Hotkey | Mode | What happens |
+|--------|------|--------------|
+| `Ctrl+Opt+T` | Quick text | Spotlight-style bar appears — type or paste, press Enter |
+| `Ctrl+Opt+S` | Screenshot | Select a screen region — optional text note — saved |
+| `Ctrl+Opt+A` | Voice note | Toggle: first press starts recording, second press stops and transcribes |
+
+All captures are saved as timestamped markdown in `~/.yoursystemname/files/memories/`
+with binary assets (screenshots, audio) in `memories/assets/`. Khoj re-indexes
+automatically after each capture.
+
+### What you need
+
+The installer sets these up automatically:
+
+- **Hammerspoon** — provides global hotkeys (you must grant Accessibility permission)
+- **sox** — records audio from microphone (you must grant Microphone permission)
+- **whisper-cpp** — transcribes audio locally (no cloud, fully offline)
+
+### macOS permissions
+
+On first use, macOS will prompt you to grant:
+
+1. **Accessibility** — Hammerspoon (System Settings > Privacy & Security > Accessibility)
+2. **Screen Recording** — Hammerspoon (for screenshots)
+3. **Microphone** — sox / Hammerspoon (for voice notes)
+
+### Troubleshooting
+
+- **Hotkeys not working:** Open Hammerspoon.app manually once, then grant
+  Accessibility permission. Restart Hammerspoon.
+- **Audio recording fails:** Check microphone permission in System Settings.
+- **Transcription says "unavailable":** Verify `~/.yoursystemname/.sys/ggml-base.en.bin`
+  exists (~140 MB). If missing, re-run `install.sh`.
+- **No dock icon / menu bar:** This is by design (stealth). A red dot appears in
+  the menu bar only during audio recording.
+
 ## iPhone remote access
 
 1. Install [Tailscale](https://tailscale.com) on your Mac and iPhone
@@ -124,12 +168,18 @@ Create an iOS Shortcut:
 ```
 ~/.yoursystemname/
   files/              ← all your notes (markdown/text)
+    memories/         ← captured memories (from hotkeys)
+      assets/         ← screenshots (PNG) and audio (WAV)
   .sys/
     .keymap           ← hashed access code (SHA-256, never plaintext)
     watcher.sh        ← Google Drive → files/ sync watcher
     reindex.sh        ← trigger re-index
     setcode.sh        ← set or change access code
     import.log        ← log of auto-imported files
+    capture-text.sh   ← text capture backend
+    capture-screen.sh ← screenshot capture backend
+    capture-audio.sh  ← audio capture backend
+    ggml-base.en.bin  ← whisper model for transcription
   config/
     app.env           ← environment variables (chmod 600)
 ```
