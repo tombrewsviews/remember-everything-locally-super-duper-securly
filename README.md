@@ -25,11 +25,11 @@ The fastest way to set this up is to let an AI agent do it for you.
 1. Install [Claude Code](https://claude.ai/code)
 2. Copy the file `skill.md` from this repo into your Claude skills folder:
    ```bash
-   cp skill.md ~/.claude/skills/local-ai-memory.md
+   cp skill.md ~/.claude/skills/remember-everything-locally-super-duper-securly.md
    ```
 3. Open Claude Code in any directory and run:
    ```
-   /local-ai-memory
+   /remember-everything-locally-super-duper-securly
    ```
 4. Claude will ask you a few questions (system name, command name, access code) and handle everything else automatically.
 
