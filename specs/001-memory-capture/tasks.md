@@ -153,10 +153,10 @@
 
 **Purpose**: Integration testing, documentation, cleanup
 
-- [ ] T038 [P] Update `README.md` — add Memory Capture section documenting hotkeys, usage, permissions, troubleshooting
-- [ ] T039 Run end-to-end validation per `quickstart.md` test scenarios — text capture, screenshot, audio, stealth, reindex
-- [ ] T040 Run shellcheck across all capture scripts and fix any remaining warnings
-- [ ] T041 Verify all 43 BDD test scenarios (TS-001 through TS-043) have corresponding bats test coverage or manual verification steps
+- [x] T038 [P] Update `README.md` — add Memory Capture section documenting hotkeys, usage, permissions, troubleshooting
+- [x] T039 Run end-to-end validation per `quickstart.md` test scenarios — text capture, screenshot, audio, stealth, reindex
+- [x] T040 Run shellcheck across all capture scripts and fix any remaining warnings
+- [x] T041 Verify all 43 BDD test scenarios (TS-001 through TS-043) have corresponding bats test coverage or manual verification steps
 
 ---
 
