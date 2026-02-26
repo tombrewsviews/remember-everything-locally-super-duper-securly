@@ -212,14 +212,83 @@ launchctl unload "$PLIST" 2>/dev/null || true
 launchctl load "$PLIST"
 launchctl start "com.user.$SYS_NAME-watch" 2>/dev/null || true
 
-# ── 14. Set access code ───────────────────────
+# ── 14. Install memory capture dependencies ───
+echo "Installing memory capture dependencies..."
+brew install --cask hammerspoon 2>/dev/null || true
+brew install sox 2>/dev/null || true
+brew install whisper-cpp 2>/dev/null || true
+brew install bats-core 2>/dev/null || true
+brew install shellcheck 2>/dev/null || true
+
+# ── 15. Download whisper model ─────────────────
+WHISPER_MODEL="$SYS_DIR/.sys/ggml-base.en.bin"
+if [[ ! -f "$WHISPER_MODEL" ]]; then
+  echo "Downloading whisper base.en model (~140 MB)..."
+  curl -L --progress-bar \
+    "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.en.bin" \
+    -o "$WHISPER_MODEL"
+  echo "Whisper model saved: $WHISPER_MODEL"
+else
+  echo "Whisper model already present: $WHISPER_MODEL"
+fi
+
+# ── 16. Create memories directory ──────────────
+mkdir -p "$SYS_DIR/files/memories/assets"
+touch "$SYS_DIR/files/memories/.metadata_never_index"
+touch "$SYS_DIR/files/memories/assets/.metadata_never_index"
+
+# ── 17. Install capture scripts ────────────────
+for script in capture-common.sh capture-text.sh capture-screen.sh capture-audio.sh; do
+  sed "s|SYSTEM_NAME|$SYS_NAME|g" "$SCRIPT_DIR/scripts/$script" > "$SYS_DIR/.sys/$script"
+  chmod +x "$SYS_DIR/.sys/$script"
+done
+
+# ── 18. Deploy Hammerspoon module ──────────────
+HS_DIR="$HOME/.hammerspoon"
+mkdir -p "$HS_DIR"
+
+# Template and install memcapture.lua
+sed "s|SYSTEM_NAME|$SYS_NAME|g" "$SCRIPT_DIR/templates/memcapture.lua" > "$HS_DIR/memcapture.lua"
+
+# Add require("memcapture") to init.lua if not already present
+HS_INIT="$HS_DIR/init.lua"
+if [[ ! -f "$HS_INIT" ]]; then
+  echo 'require("memcapture")' > "$HS_INIT"
+elif ! grep -q 'require("memcapture")' "$HS_INIT"; then
+  echo '' >> "$HS_INIT"
+  echo 'require("memcapture")' >> "$HS_INIT"
+fi
+
+# Hide Hammerspoon dock icon via defaults
+defaults write org.hammerspoon.Hammerspoon MJShowDockIconKey -bool false 2>/dev/null || true
+
+# Reload Hammerspoon if running
+if pgrep -q Hammerspoon; then
+  open -g hammerspoon://reload 2>/dev/null || true
+fi
+
+# ── 19. Print permission instructions ──────────
+echo ""
+echo "  ┌─────────────────────────────────────────────────────┐"
+echo "  │  macOS permissions required for memory capture:      │"
+echo "  │                                                      │"
+echo "  │  1. Accessibility: Hammerspoon (for global hotkeys)  │"
+echo "  │  2. Screen Recording: Hammerspoon (for screenshots)  │"
+echo "  │  3. Microphone: sox/Hammerspoon (for audio capture)  │"
+echo "  │                                                      │"
+echo "  │  Open: System Settings → Privacy & Security          │"
+echo "  │  Grant permissions when prompted on first use.       │"
+echo "  └─────────────────────────────────────────────────────┘"
+echo ""
+
+# ── 20. Set access code ───────────────────────
 echo ""
 echo "  Almost done! You need to set your access code."
 echo "  This is a 6-character code required to start $CMD_NAME."
 echo ""
 "$SYS_DIR/.sys/setgrove.sh"
 
-# ── 15. Set admin credentials ────────────────
+# ── 21. Set admin credentials ────────────────
 echo ""
 echo "  Set your admin credentials (used to log in at /server/admin):"
 echo ""
@@ -242,6 +311,11 @@ echo "  Change code:   ~/.$SYS_NAME/.sys/setgrove.sh"
 echo ""
 echo "  Drop notes into: ~/.$SYS_NAME/files/"
 echo "  Or via Google Drive inbox folder (auto-imported)"
+echo ""
+echo "  Memory capture hotkeys:"
+echo "    Ctrl+Opt+T  Quick text note"
+echo "    Ctrl+Opt+S  Screenshot with annotation"
+echo "    Ctrl+Opt+A  Audio recording (toggle)"
 echo ""
 echo "  iPhone access: start with --remote, connect Tailscale,"
 echo "  open http://[your-tailscale-ip]:9371 in Safari"
