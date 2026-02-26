@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
+# Template — SYSTEM_NAME and COMMAND_NAME are replaced by install.sh
 
-GRVMAP="$HOME/.logmem/.sys/.grvmap"
-LOGMEM_PORT=9371
+GRVMAP="$HOME/.SYSTEM_NAME/.sys/.grvmap"
+PORT=9371
 
-# Check that the access code has been set
 if [ ! -f "$GRVMAP" ]; then
-  echo "Not configured. Run: ~/.logmem/.sys/setgrove.sh"
+  echo "Not configured. Run: ~/.SYSTEM_NAME/.sys/setgrove.sh"
   exit 1
 fi
 
@@ -20,9 +20,9 @@ if [ "$HASHED" != "$STORED" ]; then
 fi
 
 # Load environment
-if [ -f "$HOME/.logmem/config/khoj.env" ]; then
+if [ -f "$HOME/.SYSTEM_NAME/config/khoj.env" ]; then
   set -a
-  source "$HOME/.logmem/config/khoj.env"
+  source "$HOME/.SYSTEM_NAME/config/khoj.env"
   set +a
 fi
 
@@ -37,6 +37,6 @@ fi
 
 exec khoj \
   --host "$BIND_HOST" \
-  --port "$LOGMEM_PORT" \
+  --port "$PORT" \
   --anonymous-mode \
   2>&1

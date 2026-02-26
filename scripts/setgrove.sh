@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Set or change the 6-character access code for remember-everything-locally-super-duper-securly.
 # Run this once during setup, or again any time you want to change it.
+# Template — SYSTEM_NAME is replaced by install.sh.
 
-GRVMAP="$HOME/.logmem/.sys/.grvmap"
+GRVMAP="$HOME/.SYSTEM_NAME/.sys/.grvmap"
 
 echo ""
 read -s -p "Enter new 6-character access code: " INPUT_CODE

@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.user.remember-everything-watch</string>
+    <string>com.user.SYSTEM_NAME-watch</string>
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>REPLACE_HOME/.logmem/.sys/watcher.sh</string>
+        <string>REPLACE_HOME/.SYSTEM_NAME/.sys/watcher.sh</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>REPLACE_HOME/.logmem/.sys/import.log</string>
+    <string>REPLACE_HOME/.SYSTEM_NAME/.sys/import.log</string>
     <key>StandardErrorPath</key>
-    <string>REPLACE_HOME/.logmem/.sys/import.log</string>
+    <string>REPLACE_HOME/.SYSTEM_NAME/.sys/import.log</string>
 </dict>
 </plist>
