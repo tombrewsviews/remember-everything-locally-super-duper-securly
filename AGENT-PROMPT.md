@@ -1,4 +1,4 @@
-# Local AI Memory System — Agent Setup Prompt
+# remember-everything-locally-super-duper-securly — Agent Setup Prompt
 
 You are setting up a private, local AI memory system on macOS. This is built on top of Khoj (open-source AI second brain) but customised for privacy, stealth, and offline-first operation.
 
@@ -17,7 +17,7 @@ Before doing anything, ask the user:
 5. **Admin password** — password for the Khoj admin panel.
 6. **AI model preference** — local (Ollama, free/offline) or cloud API (OpenAI/Anthropic)?
 
-Store these values and use them throughout the rest of setup. Refer to the system by the chosen name, not by "logmem" or "Khoj".
+Store these values and use them throughout the rest of setup. Refer to the system by the chosen name, not by "remember-everything-locally-super-duper-securly" or "Khoj".
 
 ---
 

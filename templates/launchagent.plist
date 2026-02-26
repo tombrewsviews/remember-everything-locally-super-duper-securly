@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.user.logmem-watch</string>
+    <string>com.user.remember-everything-watch</string>
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>

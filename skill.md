@@ -1,10 +1,10 @@
-# local-ai-memory
+# remember-everything-locally-super-duper-securly
 
 Install and configure a private, local AI memory system on macOS. Fully automated setup using an AI agent.
 
 ## Usage
 
-`/local-ai-memory`
+`/remember-everything-locally-super-duper-securly`
 
 ## What this skill does
 

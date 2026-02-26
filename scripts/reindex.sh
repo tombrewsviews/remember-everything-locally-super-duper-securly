@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Trigger Khoj to re-index all files in ~/.logmem/files/
+# Trigger Khoj to re-index all files in ~/.logmem/files/ (remember-everything-locally-super-duper-securly)
 KHOJ_PORT=9371
 curl -s -X POST "http://localhost:${KHOJ_PORT}/api/update?t=markdown" > /dev/null 2>&1 \
   && echo "Re-index triggered" \

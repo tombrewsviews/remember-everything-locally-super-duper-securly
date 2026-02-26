@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Set or change the 6-character access code for logmem.
+# Set or change the 6-character access code for remember-everything-locally-super-duper-securly.
 # Run this once during setup, or again any time you want to change it.
 
 GRVMAP="$HOME/.logmem/.sys/.grvmap"

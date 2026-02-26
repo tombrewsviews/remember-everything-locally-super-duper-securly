@@ -145,8 +145,8 @@ Create an iOS Shortcut:
 ## Uninstall
 
 ```bash
-launchctl unload ~/Library/LaunchAgents/com.user.yourname-watch.plist
-rm ~/Library/LaunchAgents/com.user.yourname-watch.plist
+launchctl unload ~/Library/LaunchAgents/com.user.remember-everything-watch.plist
+rm ~/Library/LaunchAgents/com.user.remember-everything-watch.plist
 rm ~/.local/bin/yoursystemname
 rm -rf ~/.yoursystemname
 pipx uninstall khoj  # optional
