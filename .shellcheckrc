@@ -1,0 +1,12 @@
+# ShellCheck configuration for remember-everything-locally
+# See: https://www.shellcheck.net/wiki/
+
+# Allow sourcing from paths relative to the script
+source-path=SCRIPTDIR
+
+# Disable warnings for:
+# SC1091: Not following sourced files (they may not exist during lint)
+disable=SC1091
+
+# Default shell dialect
+shell=bash
