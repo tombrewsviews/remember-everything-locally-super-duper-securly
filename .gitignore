@@ -1,0 +1,11 @@
+# Never commit secrets
+*.env
+.grvmap
+khoj.env
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Logs
+*.log
