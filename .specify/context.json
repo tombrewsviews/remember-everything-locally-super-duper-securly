@@ -1,3 +1,16 @@
 {
-  "tdd_determination": "mandatory"
+  "tdd_determination": "mandatory",
+  "planview": {
+    "nodeClassifications": {
+      "Hammerspoon (memcapture.lua)": "client",
+      "capture-text.sh": "server",
+      "capture-screen.sh": "server",
+      "capture-audio.sh": "server",
+      "sox": "server",
+      "whisper-cpp": "server",
+      "screencapture": "server",
+      "memories/ filesystem": "storage",
+      "Khoj (localhost:9371)": "server"
+    }
+  }
 }

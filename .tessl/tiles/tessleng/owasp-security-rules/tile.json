@@ -1,0 +1,12 @@
+{
+  "name": "tessleng/owasp-security-rules",
+  "version": "0.0.2",
+  "summary": "OWASP security rules.",
+  "private": true,
+  "docs": "index.md",
+  "steering": {
+    "ensure-security": {
+      "rules": "rules.md"
+    }
+  }
+}

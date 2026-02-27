@@ -1,0 +1,11 @@
+{
+  "name": "jamesmoss/agent-school",
+  "version": "0.2.0",
+  "private": false,
+  "summary": "Investigates a problem area in the codebase and finds or creates a tessl tile (rules, docs, skills) to teach agents how to handle it correctly. Use when agents keep making the same mistakes around a library, design pattern, or convention.",
+  "skills": {
+    "agent-school": {
+      "path": "SKILL.md"
+    }
+  }
+}

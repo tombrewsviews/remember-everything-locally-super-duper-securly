@@ -1,0 +1,11 @@
+{
+  "name": "tessleng/security-review",
+  "version": "0.0.0",
+  "summary": "Conduct a security review of a codebase.",
+  "skills": {
+    "tessl-security-review": {
+      "path": "skills/tessl-security-review/SKILL.md"
+    }
+  },
+  "private": true
+}

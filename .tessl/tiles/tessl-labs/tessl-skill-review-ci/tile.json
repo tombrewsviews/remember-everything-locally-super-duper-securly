@@ -1,0 +1,11 @@
+{
+  "name": "tessl-labs/tessl-skill-review-ci",
+  "version": "0.1.3",
+  "summary": "Implements Tessl skill review CI/CD pipelines through an interactive, configuration-first wizard. Supports GitHub Actions, Jenkins, and Azure DevOps.",
+  "private": false,
+  "skills": {
+    "tessl-skill-review-ci": {
+      "path": "SKILL.md"
+    }
+  }
+}

@@ -31,15 +31,26 @@ do_start() {
 
   # Check sox is available
   if ! command -v sox &>/dev/null; then
-    echo "Error: sox not found" >&2
+    echo "Error: sox not found — install with: brew install sox" >&2
     exit 1
   fi
 
-  # Start recording in background
-  sox -d -r 16000 -c 1 -b 16 "$TEMP_WAV" &
-  local sox_pid=$!
-  echo "$sox_pid" > "$PID_FILE"
+  # Remove any leftover temp wav
+  rm -f "$TEMP_WAV"
 
+  # Start recording with nohup so sox survives the parent shell exiting.
+  # Redirect sox stderr to /dev/null to avoid noise.
+  nohup sox -d -r 16000 -c 1 -b 16 "$TEMP_WAV" > /dev/null 2>&1 &
+  local sox_pid=$!
+
+  # Brief sleep to verify sox actually started
+  sleep 0.3
+  if ! kill -0 "$sox_pid" 2>/dev/null; then
+    echo "Error: sox failed to start recording" >&2
+    exit 1
+  fi
+
+  echo "$sox_pid" > "$PID_FILE"
   echo "recording"
 }
 
@@ -55,16 +66,29 @@ do_stop() {
   local pid
   pid="$(cat "$PID_FILE")"
 
-  # Stop sox gracefully
+  # Stop sox gracefully — send SIGINT first (sox handles it to finalize WAV headers)
   if kill -0 "$pid" 2>/dev/null; then
-    kill -TERM "$pid"
-    wait "$pid" 2>/dev/null || true
+    kill -INT "$pid" 2>/dev/null || true
+    # Wait for sox to write WAV headers and exit (up to 3 seconds)
+    local waited=0
+    while kill -0 "$pid" 2>/dev/null && [[ $waited -lt 30 ]]; do
+      sleep 0.1
+      waited=$((waited + 1))
+    done
+    # Force kill if still alive
+    if kill -0 "$pid" 2>/dev/null; then
+      kill -TERM "$pid" 2>/dev/null || true
+      sleep 0.2
+    fi
   fi
 
-  # Validate WAV file exists
+  # Clean up PID file
+  rm -f "$PID_FILE"
+
+  # Validate WAV file exists and has content
   if [[ ! -f "$TEMP_WAV" ]] || [[ ! -s "$TEMP_WAV" ]]; then
-    echo "Error: recording file not found" >&2
-    cleanup_temp_files "$PID_FILE" "$TEMP_WAV"
+    echo "Error: recording file not found or empty" >&2
+    rm -f "$TEMP_WAV"
     exit 1
   fi
 
@@ -88,14 +112,17 @@ do_stop() {
   # Move WAV to assets
   if ! mv "$TEMP_WAV" "$audio_path"; then
     echo "Error: cannot save audio file" >&2
-    cleanup_temp_files "$PID_FILE"
     exit 1
   fi
 
-  # Run whisper-cpp transcription
+  # Run whisper transcription (binary is called whisper-cli, installed via brew whisper-cpp)
+  # Model path: $SYS_DIR/ggml-base.en.bin (SYS_DIR = ~/.SYSTEM_NAME/.sys)
   local transcription=""
-  if command -v whisper-cpp &>/dev/null; then
-    transcription="$(whisper-cpp -m "$SYS_DIR/ggml-base.en.bin" -f "$audio_path" --no-timestamps 2>/dev/null)" || true
+  if command -v whisper-cli &>/dev/null; then
+    local model_path="$SYS_DIR/ggml-base.en.bin"
+    if [[ -f "$model_path" ]]; then
+      transcription="$(whisper-cli -m "$model_path" -f "$audio_path" --no-timestamps 2>/dev/null)" || true
+    fi
   fi
 
   # Fallback text if transcription failed or empty
@@ -112,9 +139,6 @@ do_stop() {
     echo ""
     echo "[audio](assets/${audio_filename})"
   } >> "$md_filepath"
-
-  # Clean up PID file
-  cleanup_temp_files "$PID_FILE"
 
   # Trigger async re-index (best-effort)
   trigger_reindex

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Save a screenshot image and create a referencing markdown memory file
+# Save a screenshot image, OCR its text, and create a referencing markdown memory file
 # Usage: capture-screen.sh <temp_image_path> [annotation_text]
 # SYSTEM_NAME is replaced by install.sh via sed
 set -e
@@ -51,6 +51,20 @@ fi
 
 # Add image reference with relative path
 echo "![screenshot](assets/${ASSET_FILENAME})" >> "$MD_FILEPATH"
+echo "" >> "$MD_FILEPATH"
+
+# --- OCR: Extract text from the screenshot ---
+OCR_TOOL="$SYS_DIR/describe-image"
+if [[ -x "$OCR_TOOL" ]]; then
+  OCR_TEXT="$("$OCR_TOOL" "$ASSET_PATH" 2>/dev/null)" || true
+  if [[ -n "$OCR_TEXT" ]]; then
+    {
+      echo "## Extracted Text"
+      echo ""
+      echo "$OCR_TEXT"
+    } >> "$MD_FILEPATH"
+  fi
+fi
 
 # Trigger async re-index (best-effort)
 trigger_reindex

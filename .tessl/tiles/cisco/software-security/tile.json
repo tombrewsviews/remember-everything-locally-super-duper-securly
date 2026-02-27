@@ -1,0 +1,11 @@
+{
+  "name": "cisco/software-security",
+  "version": "1.2.5",
+  "summary": "A software security skill that integrates with Project CodeGuard to help AI coding agents write secure code and prevent common vulnerabilities. Use this skill when writing, reviewing, or modifying code to ensure secure-by-default practices are followed.",
+  "private": false,
+  "skills": {
+    "software-security": {
+      "path": "SKILL.md"
+    }
+  }
+}

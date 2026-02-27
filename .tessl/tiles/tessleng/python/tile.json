@@ -1,0 +1,12 @@
+{
+    "name": "tessleng/python",
+    "version": "0.0.2",
+    "summary": "Python project setup and styleguides.",
+    "private": true,
+    "docs": "index.md",
+    "steering": {
+        "general-python": {
+            "rules": "index.md"
+        }
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "testify": {
+    "assertion_hash": "c5199d22500b589a31b6222f52acb9b73958d2511b1675583a49c7db894ac20c",
+    "generated_at": "2026-02-26T18:42:19Z",
+    "features_dir": "specs/001-memory-capture/tests/features",
+    "file_count": 5
+  }
+}

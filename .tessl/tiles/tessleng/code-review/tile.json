@@ -1,0 +1,16 @@
+{
+  "name": "tessleng/code-review",
+  "version": "0.1.0",
+  "summary": "Review code quality and identify areas for improvement",
+  "private": true,
+  "skills": {
+    "code-review": {
+      "path": "skills/code-review/SKILL.md"
+    }
+  },
+  "steering": {
+    "review-after-changes": {
+      "rules": "rules/review-after-changes.md"
+    }
+  }
+}

@@ -122,8 +122,8 @@ if ! mv "$TEMP_WAV" "$audio_path"; then
 fi
 
 transcription=""
-if command -v whisper-cpp &>/dev/null; then
-  transcription="$(whisper-cpp -m "$SYS_DIR/ggml-base.en.bin" -f "$audio_path" --no-timestamps 2>/dev/null)" || true
+if command -v whisper-cli &>/dev/null; then
+  transcription="$(whisper-cli -m "$SYS_DIR/ggml-base.en.bin" -f "$audio_path" --no-timestamps 2>/dev/null)" || true
 fi
 
 if [[ -z "$transcription" ]]; then

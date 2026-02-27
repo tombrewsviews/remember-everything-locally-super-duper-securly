@@ -1,0 +1,36 @@
+{
+  "name": "my-project",
+  "mode": "vendored",
+  "dependencies": {
+    "tessl-labs/intent-integrity-kit": {
+      "version": "2.7.0"
+    },
+    "cisco/software-security": {
+      "version": "1.2.5"
+    },
+    "tessleng/owasp-security-rules": {
+      "version": "0.0.2"
+    },
+    "tessleng/security-review": {
+      "version": "0.0.0"
+    },
+    "tessleng/code-review": {
+      "version": "0.1.0"
+    },
+    "tessleng/python": {
+      "version": "0.0.2"
+    },
+    "odyssey4me/code-review": {
+      "version": "0.2.0"
+    },
+    "tessleng/core-security-rules": {
+      "version": "0.0.1"
+    },
+    "jamesmoss/agent-school": {
+      "version": "0.2.0"
+    },
+    "tessl-labs/tessl-skill-review-ci": {
+      "version": "0.1.3"
+    }
+  }
+}
